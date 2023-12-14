@@ -1,0 +1,57 @@
+:root {
+  --marineBlue: hsl(215, 89%, 47%);
+  --marineBlue2: hsl(213, 74%, 38%);
+  --purplishBlue: hsl(243, 100%, 62%);
+  --pastelBlue: hsl(228, 100%, 84%);
+  --lightBlue: hsl(206, 94%, 87%);
+  --strawberryRed: hsl(354, 84%, 57%);
+  --coolGray: hsl(231, 11%, 63%);
+  --lightGray: hsl(229, 24%, 87%);
+  --magnolia: hsl(217, 100%, 97%);
+  --alabaster: hsl(231, 100%, 99%);
+  --white: hsl(0, 0%, 100%);
+  --paddingTop: 40px;
+  --radius: 10px;
+  --smallRadius: 5px;
+  --minHeight: 568px;
+  --largeMode: false;
+  }
+  //Import Ubuntu Font
+  @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
+  //Start Global Style
+  .up {
+    text-transform: uppercase;
+  }
+  .cap {
+    text-transform: capitalize;
+  }
+  .bold {
+    font-weight: bold;
+  }
+  .relative {
+    position: relative;
+  }
+  //End Global Style
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
+  }
+  input, 
+  button {
+    display: block;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: var(--magnolia);
+  }
