@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       largeMode: false,
-      step: 2,
+      step: 1,
       option: 1,
       plan: 1,
       helpers: [
