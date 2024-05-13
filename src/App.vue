@@ -241,8 +241,8 @@ p.error {
   max-width: 375px;
   position: relative;
   left: 50%;
-  top: 100px;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   &.large-mode {
     @include flex(space-between, flex-start, 30px);
     max-width: 900px;
