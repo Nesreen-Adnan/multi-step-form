@@ -1,7 +1,10 @@
 :root {
   --marineBlue: hsl(215, 89%, 47%);
   --marineBlue2: hsl(213, 74%, 38%);
+  --marineBlue3: hsl(214, 94%, 18%);
+  --darkMarineBlue3: hsl(213, 99%, 12%);
   --purplishBlue: hsl(243, 100%, 62%);
+  --darkPurplishBlue: hsl(240, 95%, 60%);
   --pastelBlue: hsl(228, 100%, 84%);
   --lightBlue: hsl(206, 94%, 87%);
   --strawberryRed: hsl(354, 84%, 57%);
@@ -11,9 +14,10 @@
   --alabaster: hsl(231, 100%, 99%);
   --white: hsl(0, 0%, 100%);
   --paddingTop: 40px;
+  --margin: 30px;
   --radius: 10px;
   --smallRadius: 5px;
-  --minHeight: 568px;
+  --imageHeight: 568px;
   --largeMode: false;
   }
   //Import Ubuntu Font
@@ -54,4 +58,5 @@
   body {
     font-family: 'Ubuntu', sans-serif;
     background-color: var(--magnolia);
+    position: relative;
   }

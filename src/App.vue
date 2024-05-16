@@ -147,6 +147,11 @@ export default {
 </script>
 <style lang="scss">
 // Start Global
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 @mixin flex($justify: center, $align: center, $gap: 10px) {
   display: flex;
   justify-content: $justify;
@@ -187,7 +192,7 @@ export default {
 .next-btn,
 .confirm-btn {
   right: 0;
-  background-color: var(--marineBlue);
+  background-color: var(--marineBlue3);
   color: var(--white);
   padding: 15px 25px;
   border-radius: var(--smallRadius);
@@ -195,13 +200,25 @@ export default {
     background-color: var(--marineBlue2);
   }
 }
-.back-btn {
-  left: 0;
-  background-color: transparent;
-  color: var(--marineBlue);
-  padding: 15px 0;
+.next-btn {
+  background-color: var(--marineBlue3);
   &:hover {
-    color: var(--marineBlue2);
+    background-color: var(--darkMarineBlue3);
+  }
+}
+.confirm-btn {
+  background-color: var(--purplishBlue);
+  &:hover {
+    background-color: var(--darkPurplishBlue);
+  }
+}
+.back-btn {
+  left: 20px;
+  background-color: transparent;
+  color: var(--coolGray);
+  padding: 15px 0;
+  &:hover, &:focus {
+    color: var(--marineBlue3);
   }
 }
 .opacity-0 {
@@ -234,233 +251,248 @@ p.error {
   transition: 0.6s;
 }
 //End Global
-.container {
-  background-color: var(--white);
-  padding: 20px;
-  border-radius: var(--radius);
-  max-width: 375px;
-  position: relative;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  &.large-mode {
-    @include flex(space-between, flex-start, 30px);
-    max-width: 900px;
-    .next-btn,
-    .confirm-btn {
-      right: var(--paddingTop);
-    }
+#app {
+  height: calc(530px + var(--margin) * 2);
+  @media (min-width: 768px) {
+    height: calc(var(--imageHeight) + 100px);
   }
-  .sidebar {
+  .container {
     width: 100%;
-    background-image: url("../public/bg-sidebar-mobile.svg");
+    background-color: var(--white);
+    border-radius: var(--radius);
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     &.large-mode {
-      background-image: url("../public/bg-sidebar-desktop.svg");
-      min-height: var(--minHeight);
-      width: 274px;
-    }
-    &:not(.large-mode) {
-      @include flex(center, center, 20px);
-    }
-    padding: var(--paddingTop) 30px;
-    border-radius: 10px;
-    list-style: none;
-    li {
-      @include flex(space-between, center, 20px);
-      color: var(--white);
-      margin-bottom: 30px;
-      letter-spacing: 1px;
-      .num {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        border: 1px solid var(--white);
-        transition: 0.3s;
+      padding: 20px;
+      margin: var(--margin) 0;
+      width: calc(100% - var(--margin) * 2);
+      height: calc(100% - 60px);
+      @include flex(space-between, normal, 45px);
+      @media (min-width: 992px) {
+        width: 900px;
       }
-      .heading {
-        flex: 1;
-        .step-num {
-          color: var(--pastelBlue);
-        }
-      }
-      &.active {
-        .num {
-          background-color: var(--lightBlue);
-          color: var(--marineBlue);
-        }
+      .next-btn,
+      .confirm-btn {
+        right: var(--paddingTop);
       }
     }
-  }
-  .content {
-    height: var(--minHeight);
-    max-width: 500px;
-    padding-top: var(--paddingTop);
-    &.large-mode {
-      padding-right: 40px;
-    }
-    p.title {
-      font-size: 35px;
-      font-weight: bold;
-      & + p {
-        color: var(--coolGray);
-        margin: 10px 0 30px;
+    .sidebar {
+      width: 100%;
+      background-image: url("../public/bg-sidebar-mobile.svg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      &.large-mode {
+        background-image: url("../public/bg-sidebar-desktop.svg");
+        min-height: 100%;
+        width: 274px;
+        border-radius: 10px;
       }
-    }
-    label,
-    p.title {
-      color: var(--marineBlue);
-    }
-    .step-two {
-      .plan {
-        @include flex(space-between, flex-start);
-        flex-direction: column;
-        border-radius: var(--smallRadius);
-        min-height: 140px;
-        flex: 1;
-        cursor: pointer;
-        border-radius: var(--smallRadius);
-        padding: 15px 10px;
-        border-width: 1.5px;
-        .name {
-          color: var(--marineBlue);
-          font-weight: bold;
-        }
-        .price {
-          color: var(--coolGray);
-        }
-      }
-      .options {
+      &:not(.large-mode) {
         @include flex(center, center, 20px);
-        background-color: var(--magnolia);
-        padding: 20px;
-        margin-top: 30px;
-        border-radius: var(--smallRadius);
-        .option {
-          color: var(--coolGray);
+      }
+      padding: var(--paddingTop) 30px;
+      list-style: none;
+      li {
+        @include flex(space-between, center, 20px);
+        color: var(--white);
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+        .num {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          border: 1px solid var(--white);
           transition: 0.3s;
-          font-weight: bold;
-          &.active {
-            color: var(--marineBlue);
-          }
         }
-        .selector {
-          position: relative;
-          background-color: var(--marineBlue);
-          border-radius: 25px;
-          width: 38px;
-          height: 22px;
-          input {
-            position: absolute;
-            left: -6px;
-            top: -17px;
-            width: 50px;
-            accent-color: var(--white);
-            appearance: none;
-            background-color: transparent;
-            cursor: pointer;
-          }
-        }
-      }
-    }
-    .step-three {
-      .box {
-        margin-bottom: 15px;
-        border-radius: var(--smallRadius);
-        padding: 10px;
-        [type="checkbox"] {
-          position: relative;
-          $CheckboxSize: 18px;
-          width: $CheckboxSize;
-          height: $CheckboxSize;
-          appearance: none;
-          border-radius: var(--smallRadius);
-          margin: 0;
-          cursor: pointer;
-          background-color: #fff;
-          &::before {
-            content: "✓";
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 100%;
-            height: 100%;
-            font-weight: bold;
-            text-align: center;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            transition: 0.3s;
-            color: #fff;
-          }
-          &:checked {
-            background-color: var(--purplishBlue);
-            &::before {
-              opacity: 1;
-            }
-          }
-        }
-        .info {
+        .heading {
           flex: 1;
-          .name {
-            color: var(--marineBlue);
+          .step-num {
+            color: var(--pastelBlue);
+          }
+        }
+        &.active {
+          .num {
+            background-color: var(--lightBlue);
+            color: var(--marineBlue3);
           }
         }
       }
     }
-    .step-four {
-      .receipt {
-          color: var(--coolGray); 
-        > * {
-          padding: 20px;
-        }
-        .items {
-          background-color: var(--alabaster);
-          border-radius: var(--smallRadius);
-          .plan {
-            @include flex(space-between);
-            padding-bottom: 20px;
-            color: var(--marineBlue);
-            font-weight: bold;
-            border-bottom: 1px solid var(--coolGray);
-            a {
-              display: block;
-              cursor: pointer;
-              text-decoration: underline;
-              transition: .3s;
-              color: var(--coolGray);
-              &:hover, &:focus {
-                color: var(--purplishBlue);
-              }
-            }
-          }
-          .helpers {
-            li {
-              @include flex(space-between);
-              margin-top: 20px;
-              .price {
-                color: var(--marineBlue);
-              }
-            }
-          }
-        }
-        .total {
-          @include flex(space-between);
-          padding-top: 20px;
-          .value {
-            color: var(--purplishBlue);
-            font-weight: bold;
-            font-size: 27px;
-          }
-        }
-        .back-btn {
+    .content {
+      height: 100%;
+      max-width: 500px;
+      padding: 20px;
+      padding-top: var(--paddingTop);
+      flex: 1;
+      &.large-mode {
+        padding-right: 40px;
+      }
+      p.title {
+        font-size: 35px;
+        font-weight: bold;
+        & + p {
           color: var(--coolGray);
+          margin: 10px 0 30px;
         }
       }
-      .finish {
-        margin: 50% 0;
-        transform: translateY(-50%);
-        text-align: center;
-        .title {
-          margin: 25px 0 15px;
+      label,
+      p.title {
+        color: var(--marineBlue3);
+      }
+      .step-two {
+        .plan {
+          @include flex(space-between, flex-start);
+          flex-direction: column;
+          border-radius: var(--smallRadius);
+          min-height: 140px;
+          flex: 1;
+          cursor: pointer;
+          border-radius: var(--smallRadius);
+          padding: 15px 10px;
+          border-width: 1.5px;
+          .name {
+            color: var(--marineBlue3);
+            font-weight: bold;
+          }
+          .price {
+            color: var(--coolGray);
+          }
+        }
+        .options {
+          @include flex(center, center, 20px);
+          background-color: var(--magnolia);
+          padding: 20px;
+          margin-top: 30px;
+          border-radius: var(--smallRadius);
+          .option {
+            color: var(--coolGray);
+            transition: 0.3s;
+            font-weight: bold;
+            &.active {
+              color: var(--marineBlue3);
+            }
+          }
+          .selector {
+            position: relative;
+            background-color: var(--marineBlue3);
+            border-radius: 25px;
+            width: 38px;
+            height: 22px;
+            input {
+              position: absolute;
+              left: -6px;
+              top: -17px;
+              width: 50px;
+              accent-color: var(--white);
+              appearance: none;
+              background-color: transparent;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      .step-three {
+        .box {
+          margin-bottom: 15px;
+          border-radius: var(--smallRadius);
+          padding: 10px;
+          [type="checkbox"] {
+            position: relative;
+            $CheckboxSize: 18px;
+            width: $CheckboxSize;
+            height: $CheckboxSize;
+            appearance: none;
+            border-radius: var(--smallRadius);
+            margin: 0;
+            cursor: pointer;
+            background-color: #fff;
+            &::before {
+              content: "✓";
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              width: 100%;
+              height: 100%;
+              font-weight: bold;
+              text-align: center;
+              transform: translate(-50%, -50%);
+              opacity: 0;
+              transition: 0.3s;
+              color: #fff;
+            }
+            &:checked {
+              background-color: var(--purplishBlue);
+              &::before {
+                opacity: 1;
+              }
+            }
+          }
+          .info {
+            flex: 1;
+            .name {
+              color: var(--marineBlue3);
+            }
+          }
+        }
+      }
+      .step-four {
+        .receipt {
+            color: var(--coolGray); 
+          > * {
+            padding: 20px;
+          }
+          .items {
+            background-color: var(--alabaster);
+            border-radius: var(--smallRadius);
+            .plan {
+              @include flex(space-between);
+              padding-bottom: 20px;
+              color: var(--marineBlue3);
+              font-weight: bold;
+              border-bottom: 1px solid var(--coolGray);
+              a {
+                display: block;
+                cursor: pointer;
+                text-decoration: underline;
+                transition: .3s;
+                color: var(--coolGray);
+                &:hover, &:focus {
+                  color: var(--purplishBlue);
+                }
+              }
+            }
+            .helpers {
+              li {
+                @include flex(space-between);
+                margin-top: 20px;
+                .price {
+                  color: var(--marineBlue3);
+                }
+              }
+            }
+          }
+          .total {
+            @include flex(space-between);
+            padding-top: 20px;
+            .value {
+              color: var(--purplishBlue);
+              font-weight: bold;
+              font-size: 27px;
+            }
+          }
+          .back-btn {
+            color: var(--coolGray);
+          }
+        }
+        .finish {
+          margin: 50% 0;
+          transform: translateY(-50%);
+          text-align: center;
+          .title {
+            margin: 25px 0 15px;
+          }
         }
       }
     }
